@@ -28,7 +28,7 @@ public class SearchTest {
         driver.findElement(By.name("q"));
 //        driver.findElement(By.linkText("WOMEN")).click();
         List<WebElement> productNameContainters = driver.findElements(By.cssSelector(".product-name > a"));
-        for (WebElement container : productNameContainters){
+        for (WebElement container : productNameContainters) {
             String productName = container.getText();
             assertThat("Some of the product name do not contain the searched keyword", productName, containsString(keyword.toUpperCase()));
             System.out.println(productName);
