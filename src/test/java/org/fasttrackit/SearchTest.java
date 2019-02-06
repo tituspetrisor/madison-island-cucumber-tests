@@ -22,6 +22,7 @@ public class SearchTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://fasttrackit.org/selenium-test/");
         String keyword = "vase";
+
         driver.findElement(By.id("search")).sendKeys(keyword);
 //        driver.findElement(By.tagName("button")).click();
         driver.findElement(By.className("button ")).click();
@@ -32,6 +33,7 @@ public class SearchTest {
             String productName = container.getText();
             assertThat("Some of the product name do not contain the searched keyword", productName, containsString(keyword.toUpperCase()));
             System.out.println(productName);
+
         }
 
     }
