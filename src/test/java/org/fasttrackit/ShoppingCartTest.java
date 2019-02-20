@@ -1,10 +1,13 @@
 package org.fasttrackit;
 
+import org.fasttrackit.pageobjects.Header;
+import org.fasttrackit.pageobjects.ProductGrid;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -15,18 +18,20 @@ public class ShoppingCartTest {
 
     @Test
     public void addToCartFromSearchResultTest(){
-        System.setProperty("webdriver.chrome.driver",
-                "c");
+        System.setProperty("webdriver.chrome.driver", AppConfig.getChromeDriverPath());
 
         WebDriver driver = new ChromeDriver();
-        driver.get("https://fasttrackit.org/selenium-test/");
-
+        driver.get(AppConfig.getSiteUrl());
         String keyword = "vase";
         String productName = "Herald Glass Vase";
 
-        driver.findElement(By.id("search")).sendKeys(keyword);
-        driver.findElement(By.className("button ")).click();
-        driver.findElement(By.xpath("//div[@class='product-info' and .// a[text()= '" + productName + "']]//button[@title='Add to Cart']")).click();
+        Header header = PageFactory.initElements(driver, Header.class);
+        header.search(keyword);
+
+        ProductGrid productGrid = PageFactory.initElements(driver, ProductGrid.class);
+        productGrid.addProductToCart(productName,driver);
+
+
         String successMessage = driver.findElement(By.className("success-msg")).getText();
 
         assertThat("Some of the product are not in cart", successMessage, is(productName + " was added to your shopping cart."));
