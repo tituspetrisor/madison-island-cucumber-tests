@@ -13,15 +13,12 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ShoppingCartTest {
+public class ShoppingCartTest extends TestBase{
 
 
     @Test
     public void addToCartFromSearchResultTest(){
-        System.setProperty("webdriver.chrome.driver", AppConfig.getChromeDriverPath());
 
-        WebDriver driver = new ChromeDriver();
-        driver.get(AppConfig.getSiteUrl());
         String keyword = "vase";
         String productName = "Herald Glass Vase";
 

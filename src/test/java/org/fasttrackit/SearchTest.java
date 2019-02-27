@@ -15,29 +15,17 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class SearchTest {
+public class SearchTest extends TestBase {
 
     @Test
-    public void searchByOneKeywordTest(){
-        System.setProperty("webdriver.chrome.driver",
-                AppConfig.getChromeDriverPath());
-
-        WebDriver driver = new ChromeDriver();
-        driver.get(AppConfig.getSiteUrl());
-        System.out.println("Opened homepage");
+    public void searchByOneKeywordTest() {
 
         String keyword = "vase";
-
-
         Header header = PageFactory.initElements(driver, Header.class);
-
-
-
-
         header.search(keyword);
 
         //        driver.findElement(By.tagName("button")).click();
-        driver.findElement(By.className("button ")).click();
+//        driver.findElement(By.className("button ")).click();
         driver.findElement(By.name("q"));
 //        driver.findElement(By.linkText("WOMEN")).click();
 

@@ -22,7 +22,10 @@ public class AppConfig {
     private static String chromeDriverPath = properties.getProperty("chrome.driver.path");
     private static String siteUrl = properties.getProperty("site.url");
     private static String geckoDriverPath = properties.getProperty("gecko.driver.path");
-    private static String ieDriverPath = properties.getProperty("ie.driver.path");
+    private static String ieDriverPath = properties.getProperty("IEDriverServer.exe");
+
+    private static String timeoutWait = properties.getProperty("timeout");
+
 
 
 
@@ -40,5 +43,9 @@ public class AppConfig {
 
     public static String getIeDriverPath() {
         return ieDriverPath;
+    }
+
+    public static int getTimeout(){
+        return Integer.parseInt(timeoutWait);
     }
 }
