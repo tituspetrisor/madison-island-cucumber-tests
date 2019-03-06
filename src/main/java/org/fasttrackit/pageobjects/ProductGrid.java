@@ -16,6 +16,7 @@ public class ProductGrid {
     public List<WebElement> getProductNameContainers() {
         return productNameContainers;
     }
+
     public WebElement getAddToCartButton(String productName, WebDriver driver){
         return driver.findElement(By.xpath("//div[@class='product-info' and .// a[text()= '" + productName + "']]//button[@title='Add to Cart']"));
 
