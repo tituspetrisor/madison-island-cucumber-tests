@@ -10,23 +10,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class TestBase {
 
 
-    protected WebDriver driver;
-    @Before
-    public void setup(){
-        String browser = System.getProperty("browser", "chrome");
+    protected WebDriver driver = DriverManager.getDriver();
 
-        driver = DriverManager.initDriver(browser);
-        driver.get(AppConfig.getSiteUrl());
-        System.out.println("Opened homepage");
 
-    }
 
-    @After
 
-    public void tearDowm(){
-
-        driver.quit();
-    }
     public void waitForPageToLoad(long timeoutMillis){
         do{
             long waitTime = 500;

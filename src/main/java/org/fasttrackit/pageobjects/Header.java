@@ -13,6 +13,7 @@ public class Header {
     private WebElement searchButton;
 
     public void search(String keyword){
+        searchField.clear();
 
         searchField.sendKeys(keyword);
         searchButton.click();
