@@ -19,7 +19,7 @@ Feature: Product Sorting
     Then all products are sorted by "<sort criteria>" in <sort direction> order
     Examples:
       | sort criteria | sort direction |
-      | Price         | descending     |
       | Price         | ascending      |
+      | Price         | descending     |
       | Name          | descending     |
       | Name          | ascending      |
