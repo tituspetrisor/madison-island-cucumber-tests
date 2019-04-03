@@ -3,6 +3,7 @@ package org.fasttrackit.steps;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import org.fasttrackit.TestBase;
 import org.fasttrackit.pageobjects.DriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -15,6 +16,8 @@ public class Hooks {
         String browser = System.getProperty("browser", "chrome");
         DriverManager.initDriver(browser);
         System.out.println("Opened homepage");
+
+        TestBase.getStepVariables().clear();
 
     }
 

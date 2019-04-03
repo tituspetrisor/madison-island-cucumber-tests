@@ -1,10 +1,12 @@
 package org.fasttrackit.steps;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.fasttrackit.TestBase;
 import org.fasttrackit.pageobjects.ProductGrid;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 public class ProductsGridSteps extends TestBase {
 
@@ -69,5 +72,17 @@ public class ProductsGridSteps extends TestBase {
         List<Double> sortedPrices = new ArrayList<>(prices);
         sortedPrices.sort(comparator);
         assertThat("Products are not sorted corectly", prices, equalTo(sortedPrices));
+    }
+
+
+    @And("^I store the name of the (\\d+)(?:.+?) product with Add to Cart button$")
+    public void iStoreTheNameOfTheStProductWithAddToCartButton(int productNumber) {
+        List<WebElement> nameContainers = productGrid.getAddToCartProductNameContainer();
+
+        assertThat("Not enough products displayed ", nameContainers.size(), greaterThanOrEqualTo(productNumber));
+
+        String productName = nameContainers.get(productNumber - 1).getText();
+        getStepVariables().put("addToCartProductName", productName);
+
     }
 }

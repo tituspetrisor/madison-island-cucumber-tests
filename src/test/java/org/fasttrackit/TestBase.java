@@ -1,16 +1,18 @@
 package org.fasttrackit;
 
 import org.fasttrackit.pageobjects.DriverManager;
-import org.junit.After;
-import org.junit.Before;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestBase {
 
 
     protected WebDriver driver = DriverManager.getDriver();
+
+    private static final Map<String, Object> STEP_VARIABLES = new HashMap<>();
 
 
 
@@ -30,5 +32,9 @@ public class TestBase {
                 .equals("complete"));
 
 
+    }
+
+    public static Map<String, Object> getStepVariables() {
+        return STEP_VARIABLES;
     }
 }

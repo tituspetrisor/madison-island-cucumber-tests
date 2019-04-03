@@ -17,6 +17,9 @@ public class ProductGrid {
     @FindBy(css = ".product-name > a")
     private List<WebElement> productNameContainers;
 
+    @FindBy(xpath = "//div[@class = 'product-info' and .//button[contains(@class, 'btn-cart')]]//h2[@class = 'product-name']/a")
+    private List<WebElement> addToCartProductNameContainer;
+
     @FindBy(xpath = "//span[@class = 'price' and ./parent::*[not(contains(@class, 'old-price'))]]")
     private List<WebElement> actualProductsPriceContainers;
 
@@ -26,6 +29,10 @@ public class ProductGrid {
     @FindBy(className = "sort-by-switcher")
     private WebElement sortDirectionButton;
 
+
+    public List<WebElement> getAddToCartProductNameContainer() {
+        return addToCartProductNameContainer;
+    }
 
     public WebElement getSortDirectionButton() {
         return sortDirectionButton;
@@ -39,10 +46,11 @@ public class ProductGrid {
     public List<WebElement> getProductNameContainers() {
         return productNameContainers;
     }
-    public List<String> getProductsName(){
+
+    public List<String> getProductsName() {
         List<String> names = new ArrayList<>();
 
-        for (WebElement nameContainer : productNameContainers){
+        for (WebElement nameContainer : productNameContainers) {
             String name = nameContainer.getText();
             names.add(name);
 
@@ -63,18 +71,18 @@ public class ProductGrid {
         getAddToCartButton(productName, driver).click();
     }
 
-    public List<Double> getActualProductPricesAsDoubles(){
+    public List<Double> getActualProductPricesAsDoubles() {
         List<Double> convertedPrices = new ArrayList<>();
 
-        for (WebElement priceContainer : actualProductsPriceContainers){
+        for (WebElement priceContainer : actualProductsPriceContainers) {
             String priceAsText = priceContainer.getText();
             //mathcing any character except (^) dash, at least 1 character (+), followed by any character (.), at least 1 occurrence(+)
-            // extracting first part, berfor Dash
+            // extracting first part, befor Dash
 
             Pattern pattern = Pattern.compile("([^ ]+).+");
             Matcher matcher = pattern.matcher(priceAsText);
 
-            if(matcher.find()){
+            if (matcher.find()) {
                 String priceTextWithoutCurrency = matcher.group(1);
 
                 priceTextWithoutCurrency = priceTextWithoutCurrency.replace(",", ".");
@@ -84,9 +92,6 @@ public class ProductGrid {
                 convertedPrices.add(convertedPrice);
             }
         }
-
-
-
 
 
         return convertedPrices;
